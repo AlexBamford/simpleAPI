@@ -1,0 +1,9 @@
+{
+    "code": 1008, 
+    "message": "A general internal error has occurred."
+}http://www.zoopla.co.uk/for-sale/branch/housesimple-sudbury-16930/?include_rented=false&include_retirement_homes=true&include_shared_accommodation=true&include_shared_ownership=true&include_sold=true&new_homes=include&results_sort=lowest_price&pn=5
+{"code":1008,"message":"A general internal error has occurred."}{
+    "code": 1008, 
+    "message": "A general internal error has occurred."
+}http://www.zoopla.co.uk/for-sale/branch/housesimple-sudbury-16930/?include_rented=false&include_retirement_homes=true&include_shared_accommodation=true&include_shared_ownership=true&include_sold=true&new_homes=include&results_sort=lowest_price&pn=62
+{"code":1008,"message":"A general internal error has occurred."}

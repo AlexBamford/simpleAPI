@@ -1,0 +1,1 @@
+*/15	*	*	*	*	cd ~/Documents/Coding/Github/simpleAPI && /usr/bin/python simpleApiQuery.py
