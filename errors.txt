@@ -1,0 +1,4 @@
+{
+    "code": 1008, 
+    "message": "A general internal error has occurred."
+}

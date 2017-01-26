@@ -1,7 +1,8 @@
-
+#!/usr/bin/python
 import json
 import urllib
-
+import time
+t = (time.strftime("%d-%m-%Y_%H:%M:%S"))
 Extractor = "22b6a603-731b-449c-bfcb-dbd580aedd8f"
 apikey = open("apikey.txt")
 apikey = apikey.read()
@@ -9,14 +10,14 @@ apikey = apikey.read()
 
 urlList= open("URLs.txt").readlines()
 
-statusResults = open('statusResults.txt','w')
-jsondata = open('jsonData.json','w')
-errors = open('errors.txt','w')
+statusResults = open('statusResults_'+t+'.txt','w')
+jsondata = open('jsonData_'+t+'.json','w')
+errors = open('errors_'+t+'.txt','w')
 count = 0
 for url in urlList:
     try:
-        url = urllib.quote(url)
-        query = "https://extraction.import.io/query/extractor/"+Extractor+"?_apikey="+apikey+"&url="+url
+        encodedurl = urllib.quote(url)
+        query = "https://extraction.import.io/query/extractor/"+Extractor+"?_apikey="+apikey+"&url="+encodedurl
         # print query
         count += 1
         data = urllib.urlopen(query).read()
@@ -30,15 +31,19 @@ for url in urlList:
         print statusCode
         print resourceId, "\n"
         output = (sourceUrl, statusCode, resourceId)
-        textoutput = sourceUrl+str(statusCode)+resourceId
+        textoutput = str(statusCode)+", "+resourceId+", "+sourceUrl+" \n"
         statusResults.write(textoutput)
         jsondata.write(prettyInfo)
     except Exception as e:
+
         print e
-        print info
-        errors.write(info)
+        print "Error!"
+        print prettyInfo
+        errors.write(prettyInfo)
+        errors.write(url)
+        errors.write(data)
         continue
-output.close()
+jsondata.close()
 errors.close()
 statusResults.close()
     # for line in result:
