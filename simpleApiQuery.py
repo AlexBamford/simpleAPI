@@ -2,7 +2,10 @@
 import json
 import urllib
 import time
-t = (time.strftime("%d-%m-%Y_%H:%M:%S"))
+import datetime
+
+
+t = (time.strftime("%d-%m-%Y_%H:%M:%S-%Z"))
 Extractor = "22b6a603-731b-449c-bfcb-dbd580aedd8f"
 apikey = open("apikey.txt")
 apikey = apikey.read()
@@ -26,19 +29,23 @@ for url in urlList:
         statusCode = info['pageData']['statusCode']
         resourceId = info['pageData']['resourceId']
         sourceUrl = info['url']
+        timestamp = info['pageData']['timestamp']
+        timestamp = str(timestamp)[:10]
 
+        d = datetime.datetime.fromtimestamp(int(timestamp)).strftime('%a %Y-%m-%d %H:%M:%S')
+        #
         print "\n", sourceUrl
         print statusCode
         print resourceId, "\n"
         output = (sourceUrl, statusCode, resourceId)
-        textoutput = str(statusCode)+", "+resourceId+", "+sourceUrl+" \n"
+        textoutput = str(statusCode)+", "+d+", "+resourceId+", "+sourceUrl+" \n"
         statusResults.write(textoutput)
         jsondata.write(prettyInfo)
     except Exception as e:
-
         print e
         print "Error!"
         print prettyInfo
+        print str(timestamp)[:10]
         errors.write(prettyInfo)
         errors.write(url)
         errors.write(data)
@@ -46,16 +53,3 @@ for url in urlList:
 jsondata.close()
 errors.close()
 statusResults.close()
-    # for line in result:
-    #     pageNumber = 1
-    #     url2 = line['Link'][0]['href']
-    #     totalItems = line[totalItemsColumnName][0]['text']
-    #     #print url2 + str(totalItems)
-    #     items = 0
-    #     while items < int(totalItems):
-    #         newUrl = url2+paginationParameter+str(pageNumber)+"\n"
-    #         pageNumber += 1
-    #         items += itemsPerPage
-    #         print newUrl
-    #         output.write(newUrl)
-    # output.close()
