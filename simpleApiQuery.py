@@ -46,9 +46,7 @@ for url in urlList:
         print "Error!"
         print prettyInfo
         print str(timestamp)[:10]
-        errors.write(prettyInfo)
-        errors.write(url)
-        errors.write(data)
+        errors.write("\n"+url+"\n"+prettyinfo)     
         continue
 jsondata.close()
 errors.close()
